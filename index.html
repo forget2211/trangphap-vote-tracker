@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
-<title>Trang Pháp MV Vote Tracker</title>
+
+<title>Trang Pháp MV Tracker</title>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
 
 body{
-font-family: Arial;
+font-family:Arial;
 background:#fff0f6;
 margin:0;
-padding:0;
 }
 
 .header{
@@ -22,19 +23,19 @@ text-align:center;
 padding:20px;
 }
 
-.trangphap{
+.center{
 text-align:center;
 margin-top:20px;
 }
 
-.trangphap img{
+.center img{
 width:220px;
 border-radius:20px;
 box-shadow:0 0 20px #e250189;
 }
 
-.dashboard{
-width:1200px;
+.container{
+width:1100px;
 margin:auto;
 margin-top:20px;
 }
@@ -58,7 +59,7 @@ text-align:center;
 }
 
 .highlight{
-background:#ffe3ef;
+background:#ffd6e7;
 font-weight:bold;
 }
 
@@ -67,41 +68,46 @@ background:#fff3cd;
 }
 
 </style>
+
 </head>
 
 <body>
 
 <div class="header">
-<h1>Trang Pháp MV Vote Tracker</h1>
-<p>Giải Cống Hiến 2026 – Music Video</p>
+
+<h1>Trang Pháp Vote Tracker</h1>
+<p>Giải Cống Hiến 2026 - Music Video</p>
+
 </div>
 
-<div class="trangphap">
+<div class="center">
 
 <img src="https://giaithuongconghien2026.bvote.vn/images/gtch2026/2/7.jpg">
 
-<h2>Trang Pháp Tracker Center</h2>
+<h2>Trang Pháp Monitoring Center</h2>
 
 </div>
 
-<div class="dashboard">
+<div class="container">
 
-<canvas id="voteChart"></canvas>
+<canvas id="chart"></canvas>
 
 <br>
 
-<table id="rankingTable">
+<table id="ranking">
 
 <thead>
+
 <tr>
 
 <th>Rank</th>
-<th>MV</th>
+<th>Music Video</th>
 <th>Votes</th>
 <th>Speed</th>
 <th>Money Estimate</th>
 
 </tr>
+
 </thead>
 
 <tbody></tbody>
@@ -113,4 +119,5 @@ background:#fff3cd;
 <script src="tracker.js"></script>
 
 </body>
+
 </html>
