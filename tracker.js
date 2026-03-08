@@ -5,52 +5,51 @@ let history = {}
 
 let chart
 
-async function fetchVotes(){
+async function loadVotes(){
 
 const res = await fetch(API)
 
-const data = await res.json()
+const json = await res.json()
 
-updateDashboard(data.data)
-
-}
-
-function estimateMoney(votes){
-
-return votes * 20000 / 5
+updateTable(json.data)
 
 }
 
-function updateDashboard(list){
+function estimateMoney(voteChange){
 
-list.sort((a,b)=>b.vote - a.vote)
+return voteChange * 4000
+}
 
-const tbody = document.querySelector("#rankingTable tbody")
+function updateTable(list){
+
+list.sort((a,b)=>b.vote-a.vote)
+
+const tbody = document.querySelector("#ranking tbody")
 
 tbody.innerHTML=""
 
 let labels=[]
-let values=[]
+let votes=[]
 
 list.forEach((mv,i)=>{
 
-let prev = history[mv.id] || mv.vote
+let old = history[mv.id] || mv.vote
 
-let speed = mv.vote - prev
+let speed = mv.vote - old
 
 history[mv.id] = mv.vote
 
 let money = estimateMoney(speed)
 
-let row=document.createElement("tr")
+let tr=document.createElement("tr")
 
 if(mv.name.includes("Trang Pháp"))
-row.classList.add("highlight")
+tr.classList.add("highlight")
 
 if(speed>500)
-row.classList.add("warning")
+tr.classList.add("warning")
 
-row.innerHTML=`
+tr.innerHTML=`
 
 <td>${i+1}</td>
 <td>${mv.name}</td>
@@ -60,38 +59,37 @@ row.innerHTML=`
 
 `
 
-tbody.appendChild(row)
+tbody.appendChild(tr)
 
 labels.push(mv.name)
 
-values.push(mv.vote)
+votes.push(mv.vote)
 
 })
 
-updateChart(labels,values)
+drawChart(labels,votes)
 
 }
 
-function updateChart(labels,data){
+function drawChart(labels,data){
 
 if(!chart){
 
 chart=new Chart(
 
-document.getElementById("voteChart"),
+document.getElementById("chart"),
 
 {
-
 type:"line",
-
 data:{
 labels:labels,
-datasets:[{
+datasets:[
+{
 label:"Votes",
 data:data
-}]
 }
-
+]
+}
 })
 
 }
@@ -106,6 +104,6 @@ chart.update()
 
 }
 
-setInterval(fetchVotes,30000)
+setInterval(loadVotes,30000)
 
-fetchVotes()
+loadVotes()
